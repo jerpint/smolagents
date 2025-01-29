@@ -1,19 +1,23 @@
 # 🤖 Running Multi-Agent Systems with e2b
 
-This example demonstrates how to containerize and deploy your multi-smolagents to run in the cloud.
+This example demonstrates how to containerize and deploy your multi-agent `smolagent` to run in the cloud.
 
 **Note**: This is an experimental feature, currently tested on MacOS.
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- An e2b account with API key (set in `.env`)
-- e2b CLI installed
-- Docker installed and running
+- An [E2B](https://e2b.dev/) account with API key (set in `.env`)
+- E2B CLI installed
+- Docker installed and running locally
 
 ### 🏃‍♂️ Quick Start
 
-1. **Build the Container**
+1. **Prepare your agent logic**
+
+See `multi_agent_system.py` for an example of a multi-agent system.
+
+2. **Build the Container**
 ```bash
 sh build_container.sh
 ```
@@ -26,7 +30,7 @@ You should see the sandbox ID in the output of the build script.
 You will need this ID to run the system on e2b.
 You can also get it from the `e2b.toml` file (automatically created in your directory).
 
-2. **Launch Your Agents on e2b**
+3. **Launch Your Agents on e2b**
 ```bash
 python run_on_e2b.py --sandbox-id <your-sandbox-id>
 ```
