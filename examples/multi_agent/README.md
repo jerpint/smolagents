@@ -1,39 +1,38 @@
-# Using e2b to run multi-agent systems
+# 🤖 Running Multi-Agent Systems with e2b
 
-This example shows how to use e2b to run multi-agent systems.
-It will build a docker container, upload it to e2b, and run it.
+This example demonstrates how to containerize and deploy your multi-smolagents to run in the cloud.
 
-This is an experimental feature.
-Tested on MacOS
+**Note**: This is an experimental feature, currently tested on MacOS.
 
-## Requirements
+## 🚀 Getting Started
 
-- e2b account and API key set in .env file
+### Prerequisites
+- An e2b account with API key (set in `.env`)
 - e2b CLI installed
-- docker installed and running locally
+- Docker installed and running
 
-## Running the example
+### 🏃‍♂️ Quick Start
 
-All the logic of the multi-agent system is in `multi_agent_system.py`.
-See https://huggingface.co/docs/smolagents/en/examples/multiagents for more details.
-
-First, build the docker container
-
+1. **Build the Container**
 ```bash
 sh build_container.sh
 ```
 
-This might take a while, especially the first time.
+The script uses the `e2b.Dockerfile` in this directory.
+Feel free to customize it with any additional dependencies your agents need.
+The initial build might take a few minutes.
 
-This will build the container from the e2b.Dockerfile in this directory.
-You can modify the Dockerfile to add any other dependencies you might need.
-
-Get the e2b sandbox id from the CLI output (or from the e2b.toml file in the current directory which will get created when you build the container).
-
-Run the multi-agent system on e2b
-
+2. **Launch Your Agents on e2b**
 ```bash
 python run_on_e2b.py
 ```
+You'll need the e2b sandbox ID from either:
+- The CLI output during build
+- The `e2b.toml` file (automatically created in your directory)
 
-If you make any changes to `multi_agent_system.py`, you will need to rebuild the docker container and re-run the multi-agent system again.
+### 📝 Making Changes
+The smolagent logic lives in `multi_agent_system.py`. If you modify this file, you'll need to:
+1. Rebuild the container
+2. Run the system again
+
+Want to learn more about the multi-agent system? Check out the [detailed documentation](https://huggingface.co/docs/smolagents/en/examples/multiagents).
