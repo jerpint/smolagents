@@ -22,16 +22,17 @@ The script uses the `e2b.Dockerfile` in this directory.
 Feel free to customize it with any additional dependencies your agents need.
 The initial build might take a few minutes.
 
+You should see the sandbox ID in the output of the build script.
+You will need this ID to run the system on e2b.
+You can also get it from the `e2b.toml` file (automatically created in your directory).
+
 2. **Launch Your Agents on e2b**
 ```bash
-python run_on_e2b.py
+python run_on_e2b.py --sandbox-id <your-sandbox-id>
 ```
-You'll need the e2b sandbox ID from either:
-- The CLI output during build
-- The `e2b.toml` file (automatically created in your directory)
 
 ### 📝 Making Changes
-The smolagent logic lives in `multi_agent_system.py`. If you modify this file, you'll need to:
+The `smolagent` logic lives in `multi_agent_system.py`. If you modify this file, you'll need to:
 1. Rebuild the container
 2. Run the system again
 

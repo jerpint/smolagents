@@ -1,22 +1,8 @@
 import os
-import os
+import argparse
 from e2b_code_interpreter import Sandbox
 from dotenv import load_dotenv
 
-def setup_environment():
-    """Load environment variables and validate sandbox ID."""
-    load_dotenv()
-
-    # For now, we hardcode the sandbox id
-    # TODO: infer the sandbox id from the current directory
-    # It looks like e2b creates e2b.toml file in the current directory
-    # and we can read the sandbox id from there
-    sandbox_id = "trb0gi2erw7c3zwq4fvi"
-
-    if not sandbox_id:
-        raise ValueError("You must provide an e2b sandbox id when using the docker e2b executor")
-
-    return sandbox_id
 
 def run_sandbox_command(sandbox: Sandbox, cmd: str, env_vars: dict) -> dict:
     """Execute a command in the sandbox with given environment variables."""
@@ -27,13 +13,23 @@ def run_sandbox_command(sandbox: Sandbox, cmd: str, env_vars: dict) -> dict:
         on_stderr=lambda data: print(data),  # Stream stderr to console
     )
 
+def parse_args():
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description='Run commands in e2b sandbox')
+    parser.add_argument('--sandbox-id',
+                      required=True,
+                      help='The e2b sandbox ID to use')
+    return parser.parse_args()
 
 def main():
     print("***EXPERIMENTAL FEATURE***")
-
+    load_dotenv()
     try:
-        # Setup environment and get sandbox ID
-        sandbox_id = setup_environment()
+        # Parse command line arguments
+        args = parse_args()
+
+        sandbox_id = args.sandbox_id
+        assert sandbox_id, "You must provide an e2b sandbox id when using the docker e2b executor"
         print(f"Using docker container on e2b with {sandbox_id=}")
 
         # Initialize sandbox
